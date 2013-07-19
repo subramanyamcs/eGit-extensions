@@ -202,7 +202,13 @@ public class ForkZestView extends ViewPart implements IZoomableWorkbenchPart,
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection sSelection = (IStructuredSelection) selection;
 			Object firstElement = sSelection.getFirstElement();
+			
 			if (firstElement instanceof RefNode) {
+				
+				if(refNode != null && refNode.equals(firstElement)) {
+					return;
+				}
+				
 				RefNode selectedRefNode = (RefNode) firstElement;
 
 				@SuppressWarnings("restriction")
@@ -271,7 +277,7 @@ public class ForkZestView extends ViewPart implements IZoomableWorkbenchPart,
 								.openWarning(
 										Display.getDefault().getActiveShell(),
 										"Forbidden Access - Private Github Repositories",
-										"You are attempting to access a Private Repository in Github. This option is not available at the moment.");
+										"You are attempting to access a Private Repository in Github without Logging In.\nUse Preference Store to Configure your Github Account\nWindows > Preferences > eGit-extensions > github-extensions");
 					}
 				} else {
 					this.refNode = null;
